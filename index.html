@@ -3,7 +3,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Babylon Template</title>
+        <title>Adam's World</title>
 
         <style>
             html, body {
@@ -101,11 +101,17 @@
                 return mesh.id === "Default"
             }
 
+            const treeMeshes = []
+
             for (const treeConfig of treeConfigs) {
                 BABYLON.SceneLoader.LoadAssetContainer("assets/", "Lowpoly_tree_sample.obj", scene, function (container) {
                 var meshes = container.meshes;
 
                 for (const mesh of meshes) {
+                    if (isTreeMesh(mesh)) {
+                        treeMeshes.push(mesh)
+                    }
+
                     mesh.position = treeConfig.position
 
                     mesh.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1)
@@ -157,7 +163,11 @@
                 if (mesh.id === house.id) {
                     window.open("https://adam.xyzdigital.com")
                 } else if (mesh.id === "Default") {
-                    window.open("https://google.ca")
+                    if (mesh === treeMeshes[0]) {
+                        window.open("https://engramhq.xyz")
+                    } else if (mesh === treeMeshes[1]) {
+                        window.open("https://adam.xyzdigital.com")
+                    }
                 }
             }
 
